@@ -1,0 +1,3 @@
+ x-init="posts = await (await fetch('https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin')).json()"
+
+- Liste des alcools et dilluants dispo

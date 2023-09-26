@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+      <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+  <div x-data="{posts: []}" x-init="posts = await (await fetch('https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin')).json()">
+    <template x-for="post in posts['drinks']">
+      <p x-text="post.strDrink"></p>
+    </template>
+  </div>
+</body>
+</html>

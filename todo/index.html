@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alpine</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+<style>
+  .delete:hover{
+    cursor: pointer;
+  }
+  .completed{
+    color: red;
+  }
+</style>
+
+</head>
+  <body>
+    <div x-data="{ todos: [], userInput:''}">
+      <form @submit.prevent>
+        <input x-model="userInput" placeholder="Ajouter une todo" type="text">
+        <button 
+          @click="if(userInput.trim() != '')
+          todos.push({name: userInput, completed: false});
+          userInput='' ">
+          Add
+        </button>
+      </form>
+
+      <template x-for="todo in todos">
+        <div>
+          <input type="checkbox" x-model="todo.completed">
+          <span x-text="todo.name" :class="{'completed': todo.completed}"></span>
+          <button @click="todos = todos.filter((curr) => curr != todo)" class="delete">x</button>
+        </div>
+      </template>
+      <button @click="todos = []" class="delete" x-show="todos.length">Clear all</button>
+      <div>
+        <span x-text="'Total ' + todos.length + ' Done ' + todos.filter((c) => c.completed).length"></span>
+      </div>
+    </div>
+  </body>
+</html>

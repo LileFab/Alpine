@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kouisine</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+<style>
+  table,
+  td {
+    border: 1px solid #333;
+  }
+  thead,
+  tfoot {
+    background-color: #333;
+    color: #fff;
+  }
+</style>
+
+</head>
+
+  <body>
+
+    <div x-data="{url: 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=', alcools: [], inputAlcool: ''}">
+      <h1>Liste des alcools dipos</h1>
+      <form @submit.prevent>
+        <input x-model="inputAlcool" placeholder="Nom de l'alcool" type="text">
+        <button @click="alcools.push({name: inputAlcool}); inputAlcool=''">Ajouter</button>
+      </form>
+
+    <template x-for="a in alcools">
+      <div>
+        <span x-text="a.name"></span>
+        <button @click="alcools = alcools.filter((curr) => curr != a)">Delete</button>
+      </div>
+    </template>
+  </div>
+  </body>
+</html>
